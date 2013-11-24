@@ -1,8 +1,6 @@
 var cancelEvents = [
   'touchstart',
   'touchmove',
-  'touchenter',
-  'touchleave',
   'touchcancel'
 ]
 
@@ -23,7 +21,7 @@ function Tap(callback) {
     var el = this
 
     cancelEvents.forEach(function (event) {
-      el.addEventListener(event, cleanup)
+      document.addEventListener(event, cleanup)
     })
 
     el.addEventListener('touchend', done)
@@ -49,7 +47,7 @@ function Tap(callback) {
 
     function cleanup() {
       cancelEvents.forEach(function (event) {
-        el.removeEventListener(event, cleanup)
+        document.removeEventListener(event, cleanup)
       })
 
       el.removeEventListener('touchend', done)
