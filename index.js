@@ -30,12 +30,7 @@ function Tap(callback) {
       cleanup()
 
       // if handled by some other handler
-      // note: not sure if these are all necessary
-      if (e2.touches.length > 1
-        || e1.changedTouches.length > 1
-        || e2.changedTouches.length > 1
-        || e1.defaultPrevented
-        || e2.defaultPrevented)
+      if (e1.defaultPrevented || e2.defaultPrevented)
         return
 
       e1.preventDefault()
