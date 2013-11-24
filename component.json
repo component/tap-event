@@ -2,7 +2,7 @@
   "name": "tap-event",
   "description": "Create tap event listeners",
   "repo": "jonathanong/tap-event",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "index.js",
   "scripts": [
     "index.js"
