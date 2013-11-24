@@ -1,0 +1,11 @@
+{
+  "name": "tap-event",
+  "description": "Create tap event listeners",
+  "repo": "jonathanong/tap-event",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ],
+  "license": "MIT"
+}
