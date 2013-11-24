@@ -5,7 +5,7 @@ Make your `touchstart` event listeners into a `tap` event listener!
 What is "correct" behavior? The `tap` event:
 
 - shouldn't be triggered until the user removes his/her finger from the surface of the screen.
-- shouldn't be triggered when the user moves his/her finger at all.
+- shouldn't be triggered when the user moves his/her finger at all (ie it should not interfere with drag events).
 - shouldn't be triggered if there's ever more than a single finger on the surface at all.
 - should never trigger the `click` event.
 
