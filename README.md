@@ -9,6 +9,11 @@ What is "correct" behavior? The `tap` event:
 - shouldn't be triggered if there's ever more than a single finger on the surface at all.
 - should never trigger the `click` event.
 
+Some notes:
+
+- Stopping propagation is now more difficult.
+- There are no timeouts on tap events - yet.
+
 ## API
 
 ```js
