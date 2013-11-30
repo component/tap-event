@@ -1,7 +1,13 @@
 var cancelEvents = [
   'touchstart',
   'touchmove',
-  'touchcancel'
+  'touchcancel',
+  'touchenter',
+  'touchleave',
+]
+
+var endEvents = [
+  'touchend',
 ]
 
 module.exports = Tap
@@ -21,10 +27,12 @@ function Tap(callback) {
     var el = this
 
     cancelEvents.forEach(function (event) {
-      document.addEventListener(event, cleanup)
+      el.addEventListener(event, cleanup)
     })
 
-    el.addEventListener('touchend', done)
+    endEvents.forEach(function (event) {
+      el.addEventListener(event, done)
+    })
 
     function done(e2) {
       cleanup()
@@ -32,9 +40,23 @@ function Tap(callback) {
       // if handled by some other handler
       if (e1.defaultPrevented || e2.defaultPrevented)
         return
+      // make sure a touchstart event didn't occur outside of the element
+      if (e2.touches.length > 1)
+        return
 
-      e1.preventDefault()
-      e2.preventDefault()
+      var preventDefault = e1.preventDefault
+      var stopPropagation = e1.stopPropagation
+
+      e2.stopPropagation = function () {
+        stopPropagation.call(e1)
+        stopPropagation.call(e2)
+      }
+
+      e2.preventDefault = function () {
+        preventDefault.call(e1)
+        preventDefault.call(e2)
+      }
+
       // calls the handler with the `end` event,
       // but i don't think it matters.
       callback.call(el, e2)
@@ -42,10 +64,12 @@ function Tap(callback) {
 
     function cleanup() {
       cancelEvents.forEach(function (event) {
-        document.removeEventListener(event, cleanup)
+        el.removeEventListener(event, cleanup)
       })
 
-      el.removeEventListener('touchend', done)
+      endEvents.forEach(function (event) {
+        el.removeEventListener(event, done)
+      })
     }
   }
 }

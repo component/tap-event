@@ -11,7 +11,6 @@ What is "correct" behavior? The `tap` event:
 
 Some notes:
 
-- Stopping propagation is now more difficult.
 - There are no timeouts on tap events - yet.
 
 ## API
