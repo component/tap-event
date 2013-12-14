@@ -1,8 +1,8 @@
 {
   "name": "tap-event",
   "description": "Create tap event listeners",
-  "repo": "jonathanong/tap-event",
-  "version": "0.0.5",
+  "repo": "component/tap-event",
+  "version": "0.0.6",
   "main": "index.js",
   "scripts": [
     "index.js"
