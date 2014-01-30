@@ -19,7 +19,7 @@ function Tap(callback) {
   // el.addEventListener('touchstart', listener)
   function listener(e1) {
     // tap should only happen with a single finger
-    if (e1.touches.length > 1)
+    if (!e1.touches || e1.touches.length > 1)
       return
 
     var el = this
