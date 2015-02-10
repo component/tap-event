@@ -19,8 +19,7 @@ function Tap(callback) {
   // el.addEventListener('touchstart', listener)
   function listener(e1) {
     // tap should only happen with a single finger
-    if (!e1.touches || e1.touches.length > 1)
-      return
+    if (!e1.touches || e1.touches.length > 1) return
 
     var el = this
 
@@ -37,14 +36,12 @@ function Tap(callback) {
       // and because of bubbling,
       // it'll execute this on the same touchstart.
       // this filters out the same touchstart event.
-      if (e1 === e2)
-        return
+      if (e1 === e2) return
 
       cleanup()
 
       // already handled
-      if (e2.defaultPrevented)
-        return
+      if (e2.defaultPrevented) return
 
       var preventDefault = e1.preventDefault
       var stopPropagation = e1.stopPropagation
@@ -65,8 +62,7 @@ function Tap(callback) {
     }
 
     function cleanup(e2) {
-      if (e1 === e2)
-        return
+      if (e1 === e2) return
 
       cancelEvents.forEach(function (event) {
         document.removeEventListener(event, cleanup)
