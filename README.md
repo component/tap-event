@@ -12,7 +12,7 @@ What is "correct" behavior? The `tap` event:
 ## API
 
 ```js
-var tap = require('event-tap')
+var tap = require('tap-event')
 
 var el = document.querySelector('#container')
 
