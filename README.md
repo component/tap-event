@@ -9,10 +9,6 @@ What is "correct" behavior? The `tap` event:
 - shouldn't be triggered if there's ever more than a single finger on the surface at all.
 - should never trigger the `click` event.
 
-Some notes:
-
-- There are no timeouts on tap events - yet.
-
 ## API
 
 ```js
@@ -42,4 +38,18 @@ or, more succinctly:
 document.querySelector('#container').addEventListener('touchstart', tap(function (e) {
   location.href = this.href
 }))
+```
+
+To set a custom timeout (default is `200ms`), you have two options:
+
+```js
+// set globally
+tap.timeout = 300
+
+// set per instance
+tap(function (e) {
+
+}, {
+  timeout: 300
+})
 ```

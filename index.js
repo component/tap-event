@@ -10,7 +10,16 @@ var endEvents = [
 
 module.exports = Tap
 
-function Tap(callback) {
+// default tap timeout in ms
+Tap.timeout = 200;
+
+function Tap(callback, options) {
+  options = options || {}
+  // if the user holds his/her finger down for more than 200ms,
+  // then it's not really considered a tap.
+  // however, you can make this configurable.
+  var timeout = options.timeout || Tap.timeout
+
   // to keep track of the original listener
   listener.handler = callback
 
@@ -22,6 +31,8 @@ function Tap(callback) {
     if (!e1.touches || e1.touches.length > 1) return
 
     var el = this
+
+    var timeout_id = setTimeout(cleanup, timeout)
 
     cancelEvents.forEach(function (event) {
       document.addEventListener(event, cleanup)
@@ -43,6 +54,7 @@ function Tap(callback) {
       // already handled
       if (e2.defaultPrevented) return
 
+      // overwrite these functions so that they all to both start and events.
       var preventDefault = e1.preventDefault
       var stopPropagation = e1.stopPropagation
 
@@ -61,8 +73,15 @@ function Tap(callback) {
       callback.call(el, e2)
     }
 
+    // cleanup end events
+    // to cancel the tap, just run this early
     function cleanup(e2) {
+      // if it's the same event as the origin,
+      // then don't actually cleanup.
+      // hit issues with this - don't remember
       if (e1 === e2) return
+
+      clearTimeout(timeout_id)
 
       cancelEvents.forEach(function (event) {
         document.removeEventListener(event, cleanup)
