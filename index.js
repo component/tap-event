@@ -11,7 +11,7 @@ var endEvents = [
 module.exports = Tap
 
 // default tap timeout in ms
-Tap.timeout = 200;
+Tap.timeout = 200
 
 function Tap(callback, options) {
   options = options || {}

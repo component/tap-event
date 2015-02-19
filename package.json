@@ -12,5 +12,11 @@
   ],
   "files": [
     "index.js"
-  ]
+  ],
+  "devDependencies": {
+    "standardberry": "^1.0.0"
+  },
+  "scripts": {
+    "lint": "standardberry index.js"
+  }
 }
